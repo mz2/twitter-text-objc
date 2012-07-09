@@ -21,6 +21,10 @@ typedef enum {
 } TwitterTextEntityType;
 
 @interface TwitterTextEntity : NSObject
+{
+    TwitterTextEntityType type;
+    NSRange range;
+}
 
 @property (nonatomic, assign) TwitterTextEntityType type;
 @property (nonatomic, assign) NSRange range;
