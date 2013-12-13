@@ -308,7 +308,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)entitiesInText:(NSString*)text
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
 
     NSMutableArray *results = [NSMutableArray array];
@@ -348,7 +348,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)URLsInText:(NSString*)text
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
     
     if (!validURLRegexp) {
@@ -454,7 +454,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)hashtagsInText:(NSString*)text checkingURLOverlap:(BOOL)checkingURLOverlap
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
 
     NSArray *urls = nil;
@@ -467,7 +467,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)hashtagsInText:(NSString*)text withURLEntities:(NSArray*)urlEntities
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
     
     if (!validHashtagRegexp) {
@@ -522,7 +522,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)cashtagsInText:(NSString*)text checkingURLOverlap:(BOOL)checkingURLOverlap
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
     
     NSArray *urls = nil;
@@ -535,7 +535,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)cashtagsInText:(NSString*)text withURLEntities:(NSArray*)urlEntities
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
     
     if (!validCashtagRegexp) {
@@ -577,7 +577,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)mentionedScreenNamesInText:(NSString*)text
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
 
     NSArray *mentionsOrLists = [self mentionsOrListsInText:text];
@@ -595,7 +595,7 @@ static NSRegularExpression *endMentionRegexp;
 + (NSArray*)mentionsOrListsInText:(NSString*)text
 {
     if (!text.length) {
-        return [NSArray array];
+        return @[];
     }
 
     if (!validMentionOrListRegexp) {
@@ -695,7 +695,7 @@ static NSRegularExpression *endMentionRegexp;
     int urlLengthOffset = 0;
     NSArray *urlEntities = [self URLsInText:text];
     for (NSInteger i=urlEntities.count-1; i>=0; i--) {
-        TwitterTextEntity *entity = [urlEntities objectAtIndex:i];
+        TwitterTextEntity *entity = urlEntities[i];
         NSRange urlRange = entity.range;
         NSString *url = [string substringWithRange:urlRange];
         if ([url rangeOfString:@"https" options:(NSCaseInsensitiveSearch | NSAnchoredSearch)].location == 0) {
